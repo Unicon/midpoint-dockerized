@@ -1,0 +1,6 @@
+<Context docBase="/opt/midpoint/war/midpoint.war"
+         privileged="true"
+         antiResourceLocking="false"
+         swallowOutput="true">
+	<Manager pathname="" /> 
+</Context>        
