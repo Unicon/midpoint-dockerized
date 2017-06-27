@@ -4,17 +4,18 @@ MAINTAINER John Gasper <jgasper@unicon.net>
 
 ENV JAVA_HOME=/opt/openjdk8
 
-RUN java_version=8.0.121; \    
+RUN java_version=8.0.121; \
+    zulu_version=8.20.0.5; \
     yum update -y \
     && yum install -y wget tar \
     && yum clean all \
     \
     && echo 'Downloading the OpenJDK Zulu...' \ 
-    && wget -q http://cdn.azul.com/zulu/bin/zulu8.20.0.5-jdk8.0.121-linux_x64.tar.gz \
-    && echo "e5f4b1d997e50ffe4998c68c8ec45403  zulu8.20.0.5-jdk$java_version-linux_x64.tar.gz" | md5sum -c - \
-    && tar -zxvf zulu8.20.0.5-jdk$java_version-linux_x64.tar.gz -C /opt \
-    && ln -s /opt/zulu8.20.0.5-jdk$java_version-linux_x64 $JAVA_HOME \
-    && rm zulu8.20.0.5-jdk$java_version-linux_x64.tar.gz
+    && wget -q http://cdn.azul.com/zulu/bin/zulu$zulu_version-jdk$java_version-linux_x64.tar.gz \
+    && echo "e5f4b1d997e50ffe4998c68c8ec45403  zulu$zulu_version-jdk$java_version-linux_x64.tar.gz" | md5sum -c - \
+    && tar -zxvf zulu$zulu_version-jdk$java_version-linux_x64.tar.gz -C /opt \
+    && ln -s /opt/zulu$zulu_version-jdk$java_version-linux_x64 $JAVA_HOME \
+    && rm zulu$zulu_version-jdk$java_version-linux_x64.tar.gz
 
 #Install Tomcat
 RUN tomcat_version=8.0.39; \
@@ -31,7 +32,11 @@ RUN midpoint_version=3.5.1; \
     wget https://evolveum.com/downloads/midpoint/$midpoint_version/midpoint-$midpoint_version-dist.tar.gz \
     && tar -zxvf midpoint-$midpoint_version-dist.tar.gz -C /opt \
     && rm midpoint-$midpoint_version-dist.tar.gz \
-    && ln -sf /opt/midpoint-$midpoint_version/ /opt/midpoint
+    && ln -sf /opt/midpoint-$midpoint_version/ /opt/midpoint \
+    && mkdir -p /opt/tomcat/webapps/midpoint/ \
+    && cd /opt/tomcat/webapps/midpoint/ \
+    && /opt/openjdk8/bin/jar xvf /opt/midpoint/war/midpoint.war \
+    && rm /opt/midpoint/war/midpoint.war
 
 COPY opt-tomcat/ /opt/tomcat/
 COPY usr-local-bin/ /usr/local/bin/
