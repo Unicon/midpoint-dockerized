@@ -7,7 +7,7 @@ ENV JAVA_HOME=/opt/openjdk8
 RUN java_version=8.0.121; \
     zulu_version=8.20.0.5; \
     yum update -y \
-    && yum install -y wget tar \
+    && yum install -y wget tar graphviz \
     && yum clean all \
     \
     && echo 'Downloading the OpenJDK Zulu...' \ 
