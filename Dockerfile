@@ -28,7 +28,7 @@ RUN tomcat_version=8.0.39; \
     && rm -rf /opt/tomcat/webapps/
 
 #Install midPoint
-RUN midpoint_version=3.5.1; \
+RUN midpoint_version=3.6; \
     wget https://evolveum.com/downloads/midpoint/$midpoint_version/midpoint-$midpoint_version-dist.tar.gz \
     && tar -zxvf midpoint-$midpoint_version-dist.tar.gz -C /opt \
     && rm midpoint-$midpoint_version-dist.tar.gz \
