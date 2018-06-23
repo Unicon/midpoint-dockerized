@@ -1,6 +1,0 @@
-export CATALINA_OPTS="$CATALINA_OPTS -Xms2048m"
-export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseG1GC"
-export CATALINA_OPTS="$CATALINA_OPTS -Xloggc:/opt/tomcat/logs/garbage-collection.log"
-export CATALINA_OPTS="$CATALINA_OPTS -XX:+PrintGCDetails -XX:+PrintGCDateStamps"
-export CATALINA_OPTS="$CATALINA_OPTS -XX:+UseGCLogFileRotation"
-export CATALINA_OPTS="$CATALINA_OPTS -XX:NumberOfGCLogFiles=2 -XX:GCLogFileSize=10M"

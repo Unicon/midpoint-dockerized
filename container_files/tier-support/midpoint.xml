@@ -1,0 +1,4 @@
+<Context docBase="/opt/midpoint/webapp/" path="/midpoint" reloadable="false">
+    <!-- Allow our symlinks to work-->
+    <Resources allowLinking="true" />
+</Context>

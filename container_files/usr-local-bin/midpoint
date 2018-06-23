@@ -1,0 +1,9 @@
+#!/bin/bash
+
+. /usr/local/bin/library.sh
+
+prepMidpoint
+
+export LD_LIBRARY_PATH=/opt/shibboleth/lib64:$LD_LIBRARY_PATH
+
+exec /usr/bin/supervisord -c /opt/tier-support/supervisord.conf

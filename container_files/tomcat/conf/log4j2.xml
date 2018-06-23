@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration status="info">
+    <Properties>
+        <Property name="layout">%d [%t] %-5p %c- %m%n</Property>
+    </Properties>
+    <Appenders>
+        <File name="CATALINA"
+                     fileName="/tmp/logpipe">
+            <PatternLayout pattern="tomcat;catalina.out;${env:ENV};${env:USERTOKEN};${layout}"/>
+        </File>
+        <File name="LOCALHOST"
+                     fileName="/tmp/logpipe">
+            <PatternLayout pattern="tomcat;localhost.log;${env:ENV};${env:USERTOKEN};${layout}"/>
+        </File>
+
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="CATALINA"/>
+        </Root>
+        <Logger name="org.apache.catalina.core.ContainerBase.[Catalina].[localhost]"
+                level="info" additivity="false">
+            <AppenderRef ref="LOCALHOST"/>
+        </Logger>
+    </Loggers>
+</Configuration>
